@@ -30,7 +30,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-mocha",
-      "runtimeArgs": ["src/**/*.spec.ts"],
+      "runtimeArgs": ["--no-timeouts", "src/**/*.spec.ts"],
       "protocol": "inspector"
     },
     {
@@ -38,7 +38,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-mocha",
-      "runtimeArgs": ["${file}"],
+      "runtimeArgs": ["--no-timeouts", "${file}"],
       "protocol": "inspector"
     }
   ]
