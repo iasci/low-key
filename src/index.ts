@@ -4,7 +4,7 @@ import { ICardConfig } from "./types"
 export interface ICard {
   status: "learned" | "learning" | "relearning"
   stepsIndex: number
-  interval: number | null
+  lastInterval: number | null
   nextInterval: number
 }
 
@@ -12,7 +12,7 @@ export function createCard(): ICard {
   return {
     status: "learning",
     stepsIndex: 0,
-    interval: null,
+    lastInterval: null,
     nextInterval: null,
   }
 }
@@ -30,11 +30,12 @@ export function processCard(
   if (card.status === "learned") {
     if (correct) {
       const interval =
-        (((card.interval * 130) / 100) * config.INTERVAL_MODIFIER_PERCENT) / 100
+        (((card.lastInterval * 130) / 100) * config.INTERVAL_MODIFIER_PERCENT) /
+        100
 
       return {
         ...card,
-        interval,
+        lastInterval: interval,
         nextInterval: Math.min(config.MAXIMUM_INTERVAL_DAYS, interval),
       }
     } else {
@@ -61,7 +62,7 @@ export function processCard(
         return {
           ...card,
           status: "learned",
-          interval,
+          lastInterval: interval,
           nextInterval: interval,
         }
       }
@@ -87,13 +88,13 @@ export function processCard(
       } else {
         const interval = Math.max(
           config.MINIMUM_INTERVAL_DAYS,
-          (card.interval * config.NEW_INTERVAL_PERCENT) / 100
+          (card.lastInterval * config.NEW_INTERVAL_PERCENT) / 100
         )
         return {
           ...card,
           status: "learned",
           stepsIndex: card.stepsIndex + 1,
-          interval,
+          lastInterval: interval,
           nextInterval: interval,
         }
       }
