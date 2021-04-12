@@ -4,6 +4,9 @@
   "description": "SuperMemo 2 variant based on the Low-key Anki setup.",
   "main": "dist/index.js",
   "license": "MIT",
+  "author": {
+    "name": "signide"
+  },
   "scripts": {
     "prepublish": "tsc"
   },
@@ -23,5 +26,9 @@
     "yarn.lock",
     ".gitignore"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/signide/low-key.git"
+  }
 }
